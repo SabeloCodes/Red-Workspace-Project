@@ -1,0 +1,3 @@
+.DS_Store       # macOS Desktop Services Store
+Thumbs.db       # Windows thumbnail cache files
+node_modules/   # If you later use Node.js modules
