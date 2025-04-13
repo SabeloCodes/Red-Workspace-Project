@@ -4,21 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RED Workspace | Home</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="css/style.css" />
   <!-- Navigation and Footer CSS -->
-  <link rel="stylesheet" href="nav.css">
-  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/footer.css">
 </head>
 <body>
   <!-- Navigation will be dynamically inserted here -->
-  <div id="navigation"></div>
+  <header id="navigation"></header>
 
   <!-- Image Carousel -->
   <section class="carousel">
     <div class="carousel-container">
-        <img src="img/REV CAPITAL/HighRes__W9A4675 1.jpg" alt="Office 1" class="carousel-image active">
-        <img src="img/US HEDGE FUND/Magnetar 0055.jpg" alt="Office 2" class="carousel-image">
-        <img src="img/US HEDGE FUND/Magnetar 0084.jpg" alt="Office 3" class="carousel-image">
+        <img src="img/REV_CAPITAL/HighRes__W9A4675 1.jpg" alt="Office 1" class="carousel-image active">
+        <img src="img/US_HEDGE_FUND/Magnetar_0055.jpg" alt="Office 2" class="carousel-image">
+        <img src="img/US_HEDGE_FUND/Magnetar_0084.jpg" alt="Office 3" class="carousel-image">
+        <div class="carousel-caption-box">
+            <span class="caption-text"></span>
+            <div class="carousel-counter">
+                <span id="currentImage">1</span> / <span id="totalImages">3</span>
+            </div>
+        </div>
+        <div class="carousel-nav">
+            <button id="prevBtn">&lt;</button>
+            <button id="nextBtn">&gt;</button>
+        </div>
+        <div class="carousel-dots"></div>
     </div>
   </section>
 
@@ -65,7 +76,7 @@
   <section class="contact">
     <h2 class="vertical-label">Contact Us</h2>
     <div class="contact-container">
-      <img src="img/US HEDGE FUND/Magnetar 0074-HDR.jpg" alt="Contact Image">
+      <img src="img/US_HEDGE_FUND/Magnetar_0074-HDR.jpg" alt="Contact Image">
       <form class="contact-form">
         <h3>We want to hear from you.</h3>
         <input type="text" placeholder="Name">
@@ -77,7 +88,7 @@
   </section>
 
   <!-- Footer will be dynamically inserted here -->
-  <div id="footer"></div>
+  <footer id="footer"></footer>
 
   <script src="scripts.js"></script>
 </body>

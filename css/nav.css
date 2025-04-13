@@ -1,11 +1,16 @@
 .site-nav {
+    position: absolute; /* Add this line */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 4; /* Ensure it's above the carousel */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1em 2em;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
+    background: transparent; /* Make the background transparent */
+    color: #fff; /* Make the text white for visibility */
+}
   
   .site-nav .logo {
     font-weight: bold;
