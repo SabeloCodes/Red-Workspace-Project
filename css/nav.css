@@ -1,0 +1,120 @@
+.site-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .site-nav .logo {
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+  
+  .site-nav .logo span {
+    color: red;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5em;
+  }
+  
+  .nav-links li a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+  }
+  
+  .nav-links li a:hover {
+    color: red;
+  }
+
+  /* Mobile-first navigation styles */
+.site-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .site-nav .logo {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+  }
+  
+  .site-nav .logo span {
+    color: red;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .nav-links li a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+  }
+  
+  .nav-links li a:hover {
+    color: red;
+  }
+
+  /* Hamburger Button - Hidden by default on desktop */
+.hamburger {
+    display: none;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Mobile-first: menu hidden until toggled */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 1em;
+    text-align: center;
+    width: 100%;
+  }
+  
+  /* Show menu when active */
+  .nav-links.active {
+    display: flex;
+  }
+  
+  /* Show hamburger on small screens */
+  @media (max-width: 767px) {
+    .hamburger {
+      display: block;
+    }
+  }
+  
+  /* Desktop styles */
+  @media (min-width: 768px) {
+    .site-nav {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  
+    .nav-links {
+      flex-direction: row;
+      gap: 2em;
+    }
+  
+    .site-nav .logo {
+      margin-bottom: 0;
+    }
+  }
