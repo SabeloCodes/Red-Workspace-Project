@@ -13,19 +13,27 @@ body {
 }
   
 /* === CAROUSEL SECTION === */
+.section-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1em;
+  }
 .carousel {
     position: relative;
     overflow: hidden;
     height: 70vh; /* Responsive height: 70% of viewport */
     max-height: 600px;
     min-height: 300px;
-    width: 100vw; /* Ensure it spans full viewport width */
+    width: 100%; /* Stay within content bounds, not viewport */
+    margin: 0 auto;
 }
   
 .carousel-container {
     position: relative;
     height: 100%;
     width: 100%;
+    overflow: hidden; /* Prevent the zoom from spilling out */
+    border-radius: 10px; /* Optional: if you want rounded corners */
 }
 
 .carousel-image {
@@ -33,16 +41,17 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transform-origin: center center; /* Zoom from center */
     opacity: 0;
     transition: opacity 0.5s ease-in-out, transform 5s ease-in-out;
-    transform: scale(1);
+    transform: scale(1); /* Base scale */
     z-index: 0;
     border-radius: 10px; /* Rounded corners */
 }
   
 .carousel-image.active {
     opacity: 1;
-    transform: scale(1.05); /* Slow zoom-in effect */
+    transform: scale(1.05); /* Only the image zooms slightly */
     z-index: 1;
 }
 
@@ -62,11 +71,15 @@ body {
   transition: opacity 0.5s ease-in-out;
 }
 
-/* === CAROUSEL CAPTION TEXT === */
-.carousel-caption-box .caption-text {
-    display: block; /* Ensure it's a block-level element */
-    margin-top: 0.5em; /* Add some space above the text */
-  }
+/* === CAROUSEL COUNTER BUTTON === */
+.carousel-counter {
+    position: absolute;
+    bottom: 1em;
+    left: 1.5em;
+    color: #fff; /* White text for visibility */
+    z-index: 3;
+}
+
 
 /* === VIEW MORE BUTTON === */
 .view-more-btn {
@@ -85,15 +98,6 @@ body {
 
 .view-more-btn:hover {
   background: darkred;
-}
-
-/* === CAROUSEL COUNTER BUTTON === */
-.carousel-counter {
-    position: absolute;
-    bottom: 1em;
-    left: 1.5em;
-    color: #fff; /* White text for visibility */
-    z-index: 3;
 }
 
 /* === CAROUSEL NAVIGATION BUTTONS === */
