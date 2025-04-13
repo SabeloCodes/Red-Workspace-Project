@@ -4,14 +4,14 @@ function loadCommonElements() {
   fetch('components/nav.html') 
     .then(res => res.text())
     .then(data => {
-      document.querySelector('header').innerHTML = data;
+      document.getElementById('navigation').innerHTML = data; // for header
     });
 
   // Load the footer from components/footer.html into the <footer> tag
   fetch('components/footer.html') 
     .then(res => res.text())
     .then(data => {
-      document.querySelector('footer').innerHTML = data;
+      document.getElementById('footer').innerHTML = data; // for footer
     });
 }
 
