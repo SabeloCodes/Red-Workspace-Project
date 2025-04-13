@@ -19,7 +19,8 @@
   }
   
   .footer-social a img {
-    width: 24px;
+    width: 30px; /* Adjust the width of the social icons */
+    height: auto;
     margin: 0 0.5em;
     filter: invert(1);
   }

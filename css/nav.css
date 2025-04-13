@@ -15,6 +15,11 @@
   .site-nav .logo span {
     color: red;
   }
+
+  .site-nav .logo img {
+    max-height: 50px; /* Adjust the height of the logo image */
+    height: auto;
+}
   
   .nav-links {
     list-style: none;
