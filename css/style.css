@@ -36,15 +36,15 @@ body {
 .carousel {
     position: relative;
     overflow: hidden;
-    height: 70vh;
-    max-height: 600px;
+    height: 85vh;
+    max-height: 700px;
     min-height: 300px;
-    width: 97%;
-    max-width: 92vw;
+    width: 98%;
+    max-width: 95vw;
     margin: 0 auto;
     border-radius: 15px;
-    margin-bottom: 2em;
-    background: #111;
+    background-color: white; /* fallback if image doesn't load */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* subtle shadow for depth */
 }
 
 /* === CAROUSEL IMAGE WRAPPER === */
@@ -172,9 +172,9 @@ section {
 
 .cards {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap; /* Allow cards to wrap onto multiple lines */
     gap: 1em;
-    width: 100%;
+    width: 100%; /* Make sure cards take full width */
 }
 
 .card {
@@ -184,6 +184,14 @@ section {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     border-top: 3px solid transparent;
+    height: auto;
+    overflow: visible;
+    width: calc(33.33% - 1em); /* 3 cards per row with gap */
+    box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+.card p {
+    width: 100%;
 }
 
 .card:hover {
@@ -295,14 +303,11 @@ section {
     }
 
     .cards {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: center; /* Center cards horizontally */
     }
 
     .card {
-        flex: 1 1 calc(33% - 1em);
-        max-width: calc(33% - 1em);
+        width: calc(33.33% - 1em); /* 3 cards per row with gap */
     }
 
     .team {
@@ -322,7 +327,7 @@ section {
 }
 
 /* === DARK MODE SUPPORT === */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
     body {
         background: #111;
         color: #eee;
@@ -351,7 +356,7 @@ section {
         color: #eee;
         border-color: #555;
     }
-}
+} */
 
 /* === CAROUSEL OVERLAY === */
 .carousel-overlay {
