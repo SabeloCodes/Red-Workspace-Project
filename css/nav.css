@@ -1,31 +1,32 @@
+/* ==========================================================================
+   NAVIGATION STYLESHEET (nav.css)
+   Handles all styling related to the site's navigation bar for both desktop
+   and mobile, including layout, links, hover effects, and responsiveness.
+========================================================================== */
+
+/* === DESKTOP NAVIGATION BAR === */
 .site-nav {
-    position: absolute; /* Add this line */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 4; /* Ensure it's above the carousel */
+    z-index: 10; /* Sit above carousel */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1em 2em;
-    background: transparent; /* Make the background transparent */
-    color: #fff; /* Make the text white for visibility */
-}
-  
-  .site-nav .logo {
-    font-weight: bold;
-    font-size: 1.5em;
+    background: transparent; /* No background bar */
+    color: white;
+    pointer-events: auto;
   }
   
-  .site-nav .logo span {
-    color: red;
-  }
-
+  /* === LOGO STYLING === */
   .site-nav .logo img {
-    max-height: 50px; /* Adjust the height of the logo image */
+    max-height: 72px;
     height: auto;
-}
+  }
   
+  /* === NAVIGATION LINKS === */
   .nav-links {
     list-style: none;
     display: flex;
@@ -34,85 +35,74 @@
   
   .nav-links li a {
     text-decoration: none;
-    color: #333;
+    color: white;
+    font-weight: 500;
+    position: relative;
     transition: color 0.3s;
+  }
+  
+  /* === UNDERLINE EFFECT ON HOVER === */
+  .nav-links li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background-color: red;
+    transition: width 0.3s ease;
+  }
+  
+  .nav-links li a:hover::after {
+    width: 100%;
   }
   
   .nav-links li a:hover {
     color: red;
   }
-
-  /* Mobile-first navigation styles */
-.site-nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1em;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
   
-  .site-nav .logo {
-    font-weight: bold;
-    font-size: 1.5em;
-    margin-bottom: 1em;
-  }
-  
-  .site-nav .logo span {
-    color: red;
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-  }
-  
-  .nav-links li a {
-    text-decoration: none;
-    color: #333;
-    transition: color 0.3s;
-  }
-  
-  .nav-links li a:hover {
-    color: red;
-  }
-
-  /* Hamburger Button - Hidden by default on desktop */
-.hamburger {
+  /* === HAMBURGER MENU === */
+  .hamburger {
     display: none;
     font-size: 1.8rem;
     background: none;
     border: none;
     cursor: pointer;
+    color: white;
   }
   
-  /* Mobile-first: menu hidden until toggled */
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    gap: 1em;
-    text-align: center;
-    width: 100%;
-  }
-  
-  /* Show menu when active */
-  .nav-links.active {
-    display: flex;
-  }
-  
-  /* Show hamburger on small screens */
+  /* === MOBILE STYLES === */
   @media (max-width: 767px) {
+    .site-nav {
+      flex-direction: column;
+      align-items: center;
+      padding: 1em;
+    }
+  
+    .site-nav .logo {
+      margin-bottom: 1em;
+    }
+  
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      text-align: center;
+      width: 100%;
+      gap: 1em;
+      padding: 0;
+      margin: 0;
+    }
+  
+    .nav-links.active {
+      display: flex;
+    }
+  
     .hamburger {
       display: block;
     }
   }
   
-  /* Desktop styles */
+  /* === DESKTOP STYLES === */
   @media (min-width: 768px) {
     .site-nav {
       flex-direction: row;
@@ -120,6 +110,7 @@
     }
   
     .nav-links {
+      display: flex !important;
       flex-direction: row;
       gap: 2em;
     }

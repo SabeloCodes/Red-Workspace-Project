@@ -1,127 +1,101 @@
-// Load navigation and footer dynamically into the page
+// Function to load common elements (navigation and footer) dynamically
 function loadCommonElements() {
-  // Load the navigation bar from components/nav.html into the <header> tag
-  fetch('components/nav.html') 
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById('navigation').innerHTML = data; // for header
-    });
-
-  // Load the footer from components/footer.html into the <footer> tag
-  fetch('components/footer.html') 
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById('footer').innerHTML = data; // for footer
-    });
+  Promise.all([
+      fetch('components/nav.html')
+          .then(res => {
+              if (!res.ok) {
+                  throw new Error(`HTTP error! status: ${res.status}`);
+              }
+              return res.text();
+          }),
+      fetch('components/footer.html')
+          .then(res => {
+              if (!res.ok) {
+                  throw new Error(`HTTP error! status: ${res.status}`);
+              }
+              return res.text();
+          })
+  ])
+  .then(([navData, footerData]) => {
+      document.getElementById('navigation').innerHTML = navData;
+      document.getElementById('footer').innerHTML = footerData;
+  })
+  .catch(error => console.error('Error loading components:', error));
 }
 
-// Wait for the DOM to fully load before initializing functions
+// Event listener to execute code after the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-  loadCommonElements(); // Load nav and footer
-  initCarousel();       // Start the image carousel
-  setupCarouselControls(); // Setup carousel controls
+  loadCommonElements(); // Load navigation and footer
+  initCarousel(); // Initialize the image carousel
+  setupCarouselControls(); // Setup carousel controls (prev/next, dots)
 
-
-  // Toggle hamburger menu
+  // Event listener for hamburger menu click (mobile navigation)
   document.addEventListener('click', function (e) {
       if (e.target.classList.contains('hamburger')) {
           const navLinks = document.querySelector('.nav-links');
-          navLinks.classList.toggle('active');
+          navLinks.classList.toggle('active'); // Toggle the active class to show/hide nav links
       }
   });
 });
 
-// Image carousel logic with auto-slide and fade/zoom animation
+// Function to initialize the image carousel with auto-slide
 function initCarousel() {
-    const images = document.querySelectorAll('.carousel-image'); // Get all carousel images
-    let current = 0; // Start from the first image
+  const images = document.querySelectorAll('.carousel-image'); // Select all carousel images
+  let current = 0; // Initialize current image index
 
-    // Function to display the image at the given index
-    function showImage(index) {
-        images.forEach((img, i) => {
-            img.classList.remove('active'); // Hide all images
-            if (i === index) {
-                img.classList.add('active'); // Show the current image
-            }
-        });
-    }
+  // Function to display the image at a given index
+  function showImage(index) {
+      images.forEach((img, i) => img.classList.remove('active')); // Remove active class from all images
+      images[index].classList.add('active'); // Add active class to the current image
+  }
 
-    showImage(current); // Display the first image on load
+  showImage(current); // Show the first image on load
 
-    // Change image every 5 seconds
-    setInterval(() => {
-        current = (current + 1) % images.length; // Move to the next image
-        showImage(current);
-    }, 5000); // 5000ms = 5s
+  // Set interval to change images every 5 seconds
+  setInterval(() => {
+      current = (current + 1) % images.length; // Cycle through images
+      showImage(current); // Display the current image
+  }, 5000);
 }
 
-// Enhanced carousel features: captions, dot indicators, prev/next buttons
+// Function to setup carousel controls (prev/next buttons and dot indicators)
 function setupCarouselControls() {
-  const images = document.querySelectorAll('.carousel-image');
-  const captions = ["NEW CAVENDISH STREET", "MODERN INTERIORS", "LUXURY DESIGN"]; // Captions array
-  const captionBox = document.querySelector('.carousel-caption-box .caption-text');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const dotsContainer = document.querySelector('.carousel-dots');
-  let current = 0;
+  const images = document.querySelectorAll('.carousel-image'); // Select all carousel images
+  const prevBtn = document.getElementById('prevBtn'); // Select previous button
+  const nextBtn = document.getElementById('nextBtn'); // Select next button
+  const dotsContainer = document.querySelector('.carousel-dots'); // Select dot indicators container
+  let current = 0; // Initialize current image index
 
-  // Function to update the carousel and caption
+  // Function to update the carousel display
   function updateCarousel(index) {
-      images.forEach((img, i) => {
-          img.classList.remove('active');
-          if (i === index) {
-              img.classList.add('active');
-          }
-      });
-      if (captionBox) {
-          captionBox.textContent = captions[index]; // Update caption text
-      }
-      updateDots(index); // Update active dot
-      document.getElementById('currentImage').textContent = index + 1;
-      document.getElementById('totalImages').textContent = images.length;
+      images.forEach((img, i) => img.classList.remove('active')); // Remove active class from all images
+      images[index].classList.add('active'); // Add active class to the current image
+      updateDots(index); // Update dot indicators
+      document.getElementById('currentImage').textContent = index + 1; // Update current image counter
+      document.getElementById('totalImages').textContent = images.length; // Update total images counter
   }
 
-  // Function to update active dot
+  // Function to update the active dot indicator
   function updateDots(index) {
       document.querySelectorAll('.carousel-dots .dot').forEach((dot, i) => {
-          if (i === index) {
-              dot.classList.add('active');
-          } else {
-              dot.classList.remove('active');
-          }
+          dot.classList[i === index ? 'add' : 'remove']('active'); // Add/remove active class based on index
       });
   }
 
-  // Create dot indicators
+  // Create dot indicators if the container exists
   if (dotsContainer) {
       images.forEach((_, index) => {
-          const dot = document.createElement('div');
-          dot.classList.add('dot');
-          dot.addEventListener('click', () => {
-              current = index;
-              updateCarousel(current);
-          });
-          dotsContainer.appendChild(dot);
+          const dot = document.createElement('div'); // Create a dot element
+          dot.classList.add('dot'); // Add dot class
+          dot.addEventListener('click', () => { current = index; updateCarousel(current); }); // Add click event listener
+          dotsContainer.appendChild(dot); // Append dot to container
       });
       updateDots(current); // Set initial active dot
   }
 
-  // Previous button click handler
-  if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-          current = (current - 1 + images.length) % images.length;
-          updateCarousel(current);
-      });
-  }
+  // Add event listeners for previous and next buttons
+  if (prevBtn) prevBtn.addEventListener('click', () => { current = (current - 1 + images.length) % images.length; updateCarousel(current); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { current = (current + 1) % images.length; updateCarousel(current); });
 
-  // Next button click handler
-  if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-          current = (current + 1) % images.length;
-          updateCarousel(current);
-      });
-  }
-
-  // Initial update
-  updateCarousel(current);
+  updateCarousel(current); // Initialize carousel display
 }
